@@ -13,7 +13,12 @@
         <div class="card-body">
             <form asp-action="Create" method="post">
 
-                <!-- SELECCIÓN DEL PROVEEDOR -->
+                <div class="mb-3">
+                    <label for="FechaCompra" class="form-label fw-bold">Fecha de Compra</label>
+                    <input type="date" id="FechaCompra" name="FechaCompra" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                    <small class="form-text text-muted">Seleccione la fecha en que se realiza la compra.</small>
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label fw-bold">Proveedor</label>
                     <select id="ProveedorId" name="IdProveedor" class="form-select" required>
@@ -25,7 +30,6 @@
                     </select>
                 </div>
 
-                <!-- SECCIÓN DE AGREGAR PRODUCTO -->
                 <div class="card bg-light shadow-sm p-3">
                     <h5 class="fw-bold"> Agregar Producto</h5>
                     <div class="row">
@@ -63,7 +67,6 @@
                     </div>
                 </div>
 
-                <!-- TABLA DETALLE DE COMPRA -->
                 <div class="mt-4">
                     <h5 class="fw-bold"> Detalles de Compra</h5>
                     <table class="table table-bordered table-striped">
@@ -77,18 +80,27 @@
                             </tr>
                         </thead>
                         <tbody id="tablaProductos">
-                            <!-- Filas dinámicas aquí -->
                         </tbody>
+                        <tfoot>
+                            <tr class="bg-light">
+                                <th colspan="3" class="text-end">Subtotal General:</th>
+                                <th class="text-end"><input type="text" id="subtotalGeneral" class="form-control text-end fw-bold bg-light" value="0.00" readonly></th>
+                                <th></th>
+                            </tr>
+                            <tr class="bg-light">
+                                <th colspan="3" class="text-end">IVA (13%):</th>
+                                <th class="text-end"><input type="text" id="iva" class="form-control text-end fw-bold bg-light" value="0.00" readonly></th>
+                                <th></th>
+                            </tr>
+                            <tr class="bg-primary text-white">
+                                <th colspan="3" class="text-end">Total con IVA:</th>
+                                <th class="text-end"><input type="text" id="totalConIva" name="Total" class="form-control text-end fw-bold bg-primary text-white" value="0.00" readonly></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
-                <!-- TOTAL -->
-                <div class="text-end mt-3">
-                    <label class="h4 fw-bold text-primary">Total: </label>
-                    <input type="text" id="total" name="Total" class="form-control fw-bold text-end text-white bg-primary" readonly>
-                </div>
-
-                <!-- BOTÓN GUARDAR -->
                 <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary btn-lg shadow-sm">
                         Guardar Compra
@@ -101,6 +113,8 @@
 
 @section Scripts {
     <script>
+      
+
         let index = 0;
 
         document.getElementById("productoSeleccionado").addEventListener("change", function () {
@@ -136,12 +150,12 @@
             let tr = document.createElement("tr");
 
             tr.innerHTML = `
-                                <td>${nombreProducto}<input type="hidden" name="DetalleCompras[${index}].IdProducto" value="${idProducto}"></td>
-                                <td class="text-center"><input type="number" name="DetalleCompras[${index}].Cantidad" class="form-control cantidad text-center" min="1" value="${cantidad}"></td>
-                                <td class="text-end"><input type="text" name="DetalleCompras[${index}].PrecioUnitario" class="form-control precio text-end" value="${precio}"></td>
-                                <td class="text-end"><input type="text" name="DetalleCompras[${index}].SubTotal" class="form-control subtotal text-end fw-bold" value="${subtotal}" readonly></td>
-                                <td class="text-center"><button type="button" class="btn btn-danger btnEliminar">X</button></td>
-                    `;
+                                                <td>${nombreProducto}<input type="hidden" name="DetalleCompras[${index}].IdProducto" value="${idProducto}"></td>
+                                                <td class="text-center"><input type="number" name="DetalleCompras[${index}].Cantidad" class="form-control cantidad text-center" min="1" value="${cantidad}"></td>
+                                                <td class="text-end"><input type="text" name="DetalleCompras[${index}].PrecioUnitario" class="form-control precio text-end" value="${precio}"></td>
+                                                <td class="text-end"><input type="text" name="DetalleCompras[${index}].SubTotal" class="form-control subtotal text-end fw-bold" value="${subtotal}" readonly></td>
+                                                <td class="text-center"><button type="button" class="btn btn-danger btnEliminar">X</button></td>
+                                            `;
 
             tbody.appendChild(tr);
             index++;
@@ -156,12 +170,17 @@
         });
 
         function calcularTotal() {
-            let total = 0;
+            let subtotalGeneral = 0;
             document.querySelectorAll(".subtotal").forEach(sub => {
-                total += parseFloat(sub.value) || 0;
+                subtotalGeneral += parseFloat(sub.value) || 0;
             });
-            document.getElementById("total").value = total.toFixed(2);
+
+            let iva = subtotalGeneral * 0.13;
+            let totalConIva = subtotalGeneral + iva;
+
+            document.getElementById("subtotalGeneral").value = subtotalGeneral.toFixed(2);
+            document.getElementById("iva").value = iva.toFixed(2);
+            document.getElementById("totalConIva").value = totalConIva.toFixed(2);
         }
     </script>
-
 }
