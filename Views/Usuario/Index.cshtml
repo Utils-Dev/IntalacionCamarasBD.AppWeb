@@ -1,34 +1,47 @@
 ﻿@model IEnumerable<Usuario>
+
 <div class="container mt-4">
-    <h2>Listado de Estados</h2>
+    <h2>Listado de Usuarios</h2>
     <div class="row mb-3">
         <div class="col-auto">
-            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Estado</a>
+            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
         </div>
     </div>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
                 <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Fecha de Registro</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null && Model.Any())
             {
-                @foreach (var estado in Model)
+                @foreach (var usuario in Model)
                 {
                     <tr>
-                        <td>@estado.Nombre</td>
+                        <td>@usuario.Nombre</td>
+                        <td>@usuario.Correo</td>
+                        <td>@usuario.Rol.Nombre</td>
+                        <td>@usuario.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                        <td>@usuario.Estado.Nombre</td>
                         <td>
-                            <a href="@Url.Action("Edit", new { pId = @estado.IdEstado })" class="btn btn-sm btn-warning me-2">Modificar</a>
-                            <a asp-action="Delete" asp-route-id="@estado.IdEstado" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="@Url.Action("Edit", new { pId = usuario.IdUsuario })" class="btn btn-sm btn-warning me-2">Modificar</a>
+                            <a asp-action="Delete" asp-route-id="@usuario.IdUsuario" class="btn btn-sm btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 }
             }
-
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">No hay usuarios registrados.</td>
+                </tr>
+            }
         </tbody>
     </table>
-
 </div>

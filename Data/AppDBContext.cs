@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BD.AppWeb.Data
 {
-    public class AppDBContext : DbContext // Usa el nombre real de tu contexto
+    public class AppDBContext : DbContext
     {
         public AppDBContext(DbContextOptions<AppDBContext> options)
             : base(options)

@@ -10,6 +10,7 @@
         public DateTime FechaRegistro { get; set; }
         public int IdEstado { get; set; }
         public Estado Estado { get; set; }
+        public Rol Rol { get; set; }
 
         public List<Rol> Roles { get; set; }
         public List<Estado> Estados { get; set; }

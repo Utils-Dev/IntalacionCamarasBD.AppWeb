@@ -1,16 +1,16 @@
 ﻿@model Estado
 
-<form asp-action="Edit" class="container" method="post">
+<form asp-action="Delete" class="container">
     <div class="row mb-3">
         <input asp-for="IdEstado" value="@Model.IdEstado" type="hidden" />
         <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
-            <input asp-for=Nombre type="text" id="nombre" name="nombre" class="form-control" />
+            <input asp-for=Nombre type="text" id="nombre" name="nombre" class="form-control" disabled />
         </div>
     </div>
     <div class="row">
         <div class="col-auto">
-            <button type="submit" class="btn btn-info">Modificar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
         </div>
         <div class="col-auto">
             <a class="btn btn-secondary" asp-controller="Estado" asp-action="Index">Cancelar</a>

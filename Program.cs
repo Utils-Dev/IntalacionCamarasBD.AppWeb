@@ -10,6 +10,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<EstadoService>();
+builder.Services.AddScoped<RolService>();
 builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();

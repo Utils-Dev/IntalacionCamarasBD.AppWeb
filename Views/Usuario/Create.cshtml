@@ -1,45 +1,46 @@
 ﻿@model Usuario
-<form asp-action="Create" class="container">
+
+<div class="container mt-4">
+    <h2>Crear Nuevo Usuario</h2>
     <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" asp-for="Nombre" id="nombre" name="nombre" class="form-control" />
-        </div>
-        <div class="col-md-6">
-            <label for="correo" class="form-label">Correo</label>
-            <input asp-for="Correo" type="email" id="correo" name="correo" class="form-control" />
-        </div>
-       
-        <div class="col-md-6">
-            <label for="rol" class="form-label">Rol</label>
-            <select asp-for="IdRol" id="rol" name="rol" class="form-select">
-                @foreach (var item in Model.Roles)
-                {
-                    <option value="@item.IdRol">@item.Nombre</option>
-                }
-               
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label for="estado" class="form-label">Estado</label>
-            <select asp-for="IdEstado" id="estado" name="estado" class="form-select">
-                @foreach (var item in Model.Estados)
-                {
-                    <option value="@item.IdEstado">@item.IdEstado</option>
-                }
-
-            </select>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-auto">
-            <button type="submit" class="btn btn-info">Crear</button>
-        </div>
-        <div class="col-auto">
-            <a class="btn btn-secondary" asp-controller="Usuario" asp-action="Index">Cancelar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
         </div>
     </div>
 
-</form>
-
-
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="Nombre">Nombre</label>
+            <input type="text" id="Nombre" name="Nombre" class="form-control" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="Correo">Correo</label>
+            <input type="email" id="Correo" name="Correo" class="form-control" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="Password">Contraseña</label>
+            <input type="password" id="Password" name="Password" class="form-control" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="IdRol">Rol</label>
+            <select id="IdRol" name="IdRol" class="form-control" required>
+                @foreach (var rol in ViewBag.Roles)
+                {
+                    <option value="@rol.IdRol">@rol.Nombre</option>
+                }
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            <label for="IdEstado">Estado</label>
+            <select id="IdEstado" name="IdEstado" class="form-control" required>
+                @foreach (var estado in ViewBag.Estados)
+                {
+                    <option value="@estado.IdEstado">@estado.Nombre</option>
+                }
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+        </div>
+    </form>
+</div>

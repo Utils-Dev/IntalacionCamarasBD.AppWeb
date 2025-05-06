@@ -11,11 +11,14 @@ namespace BD.AppWeb.Controllers
     {
         private readonly UsuarioService _usuarioService;
         private readonly EstadoService _estadoService;
+        private readonly RolService _roleService;
 
-        public UsuarioController(UsuarioService usuarioService, EstadoService  estadoService)
+        public UsuarioController(UsuarioService usuarioService, EstadoService  estadoService , RolService roleService)
         {
             _usuarioService = usuarioService;
+            _roleService = roleService;
             _estadoService = estadoService;
+
         }
         // GET: UsuarioController
         public async Task<ActionResult> Index(byte estado)
@@ -34,8 +37,9 @@ namespace BD.AppWeb.Controllers
         // GET: UsuarioController/Create
         public async Task<ActionResult> Create()
         {
-            var estado = await _estadoService.ObtenerEstadosAsync();
-            ViewBag.Estados = new SelectList(estado, "IdEstado", "Nombre");
+            ViewBag.Roles = await _roleService.ObtenerRolesAsync();
+            ViewBag.Estados = await _estadoService.ObtenerEstadosAsync();
+
             return View();
         }
 

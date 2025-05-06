@@ -313,6 +313,21 @@ BEGIN
     WHERE IdRol = @IdRol;
 END;
 GO
+
+CREATE PROCEDURE Configuracion.SP_EliminarRol
+    @IdRol INT
+AS
+BEGIN
+    BEGIN TRY
+        DELETE FROM Configuracion.Roles
+        WHERE IdRol = @IdRol;
+    END TRY
+    BEGIN CATCH
+        THROW;
+    END CATCH
+END;
+GO
+
 ---:::::::::::::::::::::::::::FIN TABLA ROL ::::::::::::::::::::::::::::::::::::::-------------
 
 ---::::::::::::::::::::::::::::TABLA ESTADOS:::::::::::::::::::::::::::::::::::::-------------
@@ -383,6 +398,21 @@ BEGIN
     WHERE IdEstado = @IdEstado;
 END;
 GO
+
+CREATE PROCEDURE Configuracion.SP_EliminarEstado
+    @IdEstado INT
+AS
+BEGIN
+    BEGIN TRY
+        DELETE FROM Configuracion.Estados
+        WHERE IdEstado = @IdEstado;
+    END TRY
+    BEGIN CATCH
+        THROW;
+    END CATCH
+END;
+GO
+
 ---:::::::::::::::::::::::::FIN TABLA ESTADOS ::::::::::::::::::::::::::::::::::::::::-------------
 
 
@@ -454,7 +484,7 @@ BEGIN
         u.IdUsuario AS 'Código',
         u.Nombre,
         u.Correo,
-        u.IdRol,
+        r.Nombre AS 'Rol',  
         u.FechaRegistro,
         u.IdEstado,
         e.Nombre AS 'Estado' 
@@ -462,10 +492,13 @@ BEGIN
         RecursosHumanos.Usuarios u
     JOIN
         Configuracion.Estados e ON u.IdEstado = e.IdEstado
+    JOIN
+        Configuracion.Roles r ON u.IdRol = r.IdRol 
     WHERE
         u.IdEstado = @Estado;
 END;
 GO
+
 
 -- Obtener un usuario por ID
 CREATE PROCEDURE RecursosHumanos.SP_ObtenerUsuarioPorId
@@ -476,7 +509,7 @@ BEGIN
         u.IdUsuario AS 'Código',
         u.Nombre,
         u.Correo,
-        u.IdRol,
+        r.Nombre AS 'Rol',  
         u.FechaRegistro,
         u.IdEstado,
         e.Nombre AS 'Estado' 
@@ -484,10 +517,13 @@ BEGIN
         RecursosHumanos.Usuarios u
     JOIN
         Configuracion.Estados e ON u.IdEstado = e.IdEstado
+    JOIN
+        Configuracion.Roles r ON u.IdRol = r.IdRol  
     WHERE
         u.IdUsuario = @IdUsuario;
 END;
 GO
+
 
 
 ---:::::::::::::::::::::::::FIN TABLA USUARIOS ::::::::::::::::::::::::::::::::::::::::-------------

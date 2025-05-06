@@ -61,36 +61,40 @@ namespace BD.AppWeb.Controllers
         // POST: EstadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async  Task<ActionResult> Edit(Estado pEstado)
         {
             try
             {
+                await _estadoService.ModificarEstadoAsync(pEstado);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(pEstado);
             }
         }
 
         // GET: EstadoController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var estado = await _estadoService.ObtenerEstadoPorIdAsync(new Estado { IdEstado = id});
+
+            return View(estado);
         }
 
         // POST: EstadoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async  Task<ActionResult> Delete(Estado pEstado)
         {
             try
             {
+                await _estadoService.EliminarEstadoAsync(pEstado.IdEstado);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(pEstado);
             }
         }
     }
