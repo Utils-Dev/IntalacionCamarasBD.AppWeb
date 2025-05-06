@@ -1,12 +1,38 @@
 ﻿@model IEnumerable<Usuario>
 
 <div class="container mt-4">
-    <h2>Listado de Usuarios</h2>
-    <div class="row mb-3">
-        <div class="col-auto">
-            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Buscar Usuarios</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form asp-action="Index">
+                        <div class="row">
+
+                            <div class="form-group mt-3">
+                                <label for="IdEstado">Estado</label>
+                                <select id="IdEstado" name="estado" class="form-control" required>
+                                    @foreach (var estado in ViewBag.Estados)
+                                    {
+                                        <option value="@estado.IdEstado">@estado.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Buscar" class="btn btn-primary" />
+                            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+   
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>

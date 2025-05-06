@@ -484,20 +484,22 @@ BEGIN
         u.IdUsuario AS 'Código',
         u.Nombre,
         u.Correo,
-        r.Nombre AS 'Rol',  
+        u.IdRol,                      
+        r.Nombre AS 'Rol',
         u.FechaRegistro,
         u.IdEstado,
-        e.Nombre AS 'Estado' 
+        e.Nombre AS 'Estado'
     FROM
         RecursosHumanos.Usuarios u
     JOIN
         Configuracion.Estados e ON u.IdEstado = e.IdEstado
     JOIN
-        Configuracion.Roles r ON u.IdRol = r.IdRol 
+        Configuracion.Roles r ON u.IdRol = r.IdRol
     WHERE
         u.IdEstado = @Estado;
 END;
 GO
+
 
 
 -- Obtener un usuario por ID

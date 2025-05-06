@@ -24,6 +24,7 @@ namespace BD.AppWeb.Controllers
         public async Task<ActionResult> Index(byte estado)
         {
             var lista = await _usuarioService.ObtenerUsuariosPorEstadoAsync(estado);
+            ViewBag.Estados = await _estadoService.ObtenerEstadosAsync();
 
             return View(lista);
         }
@@ -46,10 +47,11 @@ namespace BD.AppWeb.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async  Task<ActionResult> Create(Usuario pUsuario)
         {
             try
             {
+                await _usuarioService.InsertarUsuarioAsync(pUsuario);
                 return RedirectToAction(nameof(Index));
             }
             catch
