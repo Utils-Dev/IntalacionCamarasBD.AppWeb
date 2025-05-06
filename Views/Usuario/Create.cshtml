@@ -2,11 +2,7 @@
 
 <div class="container mt-4">
     <h2>Crear Nuevo Usuario</h2>
-    <div class="row mb-3">
-        <div class="col-auto">
-            <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
-        </div>
-    </div>
+   
 
     <form asp-action="Create" method="post">
         <div class="row">
@@ -74,6 +70,8 @@
       
         <div class="form-group mt-3">
             <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+
         </div>
     </form>
 </div>
