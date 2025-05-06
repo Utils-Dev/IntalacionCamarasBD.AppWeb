@@ -1,0 +1,46 @@
+﻿<form asp-action="Create" class="container">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="telefono" class="form-label">Telefono</label>
+            <input type="text" id="telefono" name="telefono" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" id="correo" name="correo" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
+            <input type="date" id="fechaContratacion" name="fechaContratacion" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="IdUsuario" class="form-label">Usuario</label>
+            <select id="IdUsuario" name="IdUsuario" class="form-select">
+                <option value="1">Melisa</option>
+                <option value="2">Walter</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="estado" class="form-label">Estado</label>
+            <select id="estado" name="estado" class="form-select">
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-info">Crear</button>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-secondary" asp-controller="Empleado" asp-action="Index">Cancelar</a>
+        </div>
+    </div>
+
+</form>
+
+
+

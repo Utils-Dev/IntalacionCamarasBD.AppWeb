@@ -1,0 +1,20 @@
+﻿@model Estado
+
+<form asp-action="Edit" class="container">
+    <div class="row mb-3">
+        <input asp-for="IdEstado" value="@Model.IdEstado" hidden />
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input asp-for=Nombre type="text" id="nombre" name="nombre" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-info">Crear</button>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-secondary" asp-controller="Marca" asp-action="Index">Cancelar</a>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Estado>
+<div class="container mt-4">
+    <h2>Listado de Estados</h2>
+    <div class="row mb-3">
+        <div class="col-auto">
+            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Estado</a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var estado in Model)
+                {
+                    <tr>
+                        <td>@estado.Nombre</td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { pId = @estado.IdEstado })" class="btn btn-sm btn-warning me-2">Modificar</a>
+                            <a asp-action="Delete" asp-route-id="@estado.IdEstado" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+            
+        </tbody>
+    </table>
+
+</div>

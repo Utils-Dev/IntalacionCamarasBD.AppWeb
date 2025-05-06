@@ -1,0 +1,45 @@
+﻿@model Usuario
+<form asp-action="Create" class="container">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" asp-for="Nombre" id="nombre" name="nombre" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="correo" class="form-label">Correo</label>
+            <input asp-for="Correo" type="email" id="correo" name="correo" class="form-control" />
+        </div>
+       
+        <div class="col-md-6">
+            <label for="rol" class="form-label">Rol</label>
+            <select asp-for="IdRol" id="rol" name="rol" class="form-select">
+                @foreach (var item in Model.Roles)
+                {
+                    <option value="@item.IdRol">@item.Nombre</option>
+                }
+               
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="estado" class="form-label">Estado</label>
+            <select asp-for="IdEstado" id="estado" name="estado" class="form-select">
+                @foreach (var item in Model.Estados)
+                {
+                    <option value="@item.IdEstado">@item.IdEstado</option>
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-info">Crear</button>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-secondary" asp-controller="Usuario" asp-action="Index">Cancelar</a>
+        </div>
+    </div>
+
+</form>
+
+

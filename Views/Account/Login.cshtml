@@ -1,0 +1,213 @@
+@model BD.AppWeb.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+
+<head>
+  <title>Login</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- [Favicon] icon -->
+   <!--<link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon"> -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
+<!-- [Tabler Icons] https://tablericons.com -->
+<link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" >
+<!-- [Feather Icons] https://feathericons.com -->
+<link rel="stylesheet" href="../assets/fonts/feather.css" >
+<!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+<link rel="stylesheet" href="../assets/fonts/fontawesome.css" >
+<!-- [Material Icons] https://fonts.google.com/icons -->
+<link rel="stylesheet" href="../assets/fonts/material.css" >
+<!-- [Template CSS Files] -->
+<link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
+<link rel="stylesheet" href="../assets/css/style-preset.css" >
+<style>
+  .focus-container {
+    position: relative;
+    display: flex;
+    gap: 0.8em;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    background: #000;
+  }
+
+  .focus-word {
+    position: relative;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+    filter: blur(5px);
+    transition: filter 0.5s ease;
+  }
+
+  .focus-word.active {
+    filter: blur(0);
+  }
+
+  .focus-frame {
+    position: absolute;
+    pointer-events: none;
+    box-sizing: content-box;
+  }
+
+  .corner {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #00f7ff;
+    filter: drop-shadow(0px 0px 5px #00f7ff);
+  }
+
+  .top-left {
+    top: -5px;
+    left: -5px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .top-right {
+    top: -5px;
+    right: -5px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .bottom-left {
+    bottom: -5px;
+    left: -5px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .bottom-right {
+    bottom: -5px;
+    right: -5px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .auth-footer {
+    padding: 1rem 0;
+    text-align: center;
+  }
+</style>
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+
+<body>
+  <!-- [ Pre-loader ] start -->
+  <div class="loader-bg">
+    <div class="loader-track">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
+  <!-- [ Pre-loader ] End -->
+
+  <div class="auth-main">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="auth-header">
+        </div>
+        <div class="card my-5">
+          <div class="card-body">
+           
+            <div class="form-group mb-3">
+              <label class="form-label">Correo</label>
+              <input type="email" class="form-control" placeholder="Correo Electronico">
+            </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="d-flex mt-1 justify-content-between">
+              <div class="form-check">
+                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="">
+                <label class="form-check-label text-muted" for="customCheckc1">Recordarme</label>
+              </div>
+              <h5 class="text-secondary f-w-400">¿Olvidaste tu contraseña?</h5>
+            </div>
+            <div class="d-grid mt-4">
+              <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Iniciar Sesion</a>
+            </div>
+            <div class="saprator mt-3">
+              <span>Login with</span>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="d-grid">
+                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                    <img src="../assets/images/authentication/google.svg" alt="img"> <span class="d-none d-sm-inline-block"> Google</span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-grid">
+                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                    <img src="../assets/images/authentication/twitter.svg" alt="img"> <span class="d-none d-sm-inline-block"> Twitter</span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-grid">
+                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                    <img src="../assets/images/authentication/facebook.svg" alt="img"> <span class="d-none d-sm-inline-block"> Facebook</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="auth-footer row">
+          <div class="col-12">
+            <div class="footer-content">
+              <p class="text-muted mb-0">© @DateTime.Now.Year Sistema de Seguridad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+  <!-- Required Js -->
+  <script src="../assets/js/plugins/popper.min.js"></script>
+  <script src="../assets/js/plugins/simplebar.min.js"></script>
+  <script src="../assets/js/plugins/bootstrap.min.js"></script>
+  <script src="../assets/js/fonts/custom-font.js"></script>
+  <script src="../assets/js/pcoded.js"></script>
+  <script src="../assets/js/plugins/feather.min.js"></script>
+
+  
+  
+  
+  
+  <script>layout_change('light');</script>
+  
+  
+  
+  
+  <script>change_box_container('false');</script>
+  
+  
+  
+  <script>layout_rtl_change('false');</script>
+  
+  
+  <script>preset_change("preset-1");</script>
+  
+  
+  <script>font_change("Public-Sans");</script>
+  
+    
+ 
+</body>
+<!-- [Body] end -->
+
+</html>
